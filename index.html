@@ -32,7 +32,6 @@ h1 {
   margin-bottom: 30px;
   color: #333;
   font-size: 38px;
-  transition: 0.3s;
 }
 
 .buttons {
@@ -41,13 +40,13 @@ h1 {
 }
 
 button {
-  width: 140px;
+  width: 150px;
   padding: 10px 0;
   font-size: 22px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 #yesBtn {
@@ -59,7 +58,7 @@ button {
   background: #dc3545;
   color: white;
   position: absolute;
-  left: 160px;
+  left: 170px;
   top: 0;
 }
 
@@ -79,16 +78,15 @@ button {
 <body>
 
 <div class="container">
-  <h1 id="question">តើអ្នកស្រលាញ់ខ្ញុំទេ? ❤️</h1>
+  <h1 id="question">Do you love me? ❤️</h1>
   <div class="buttons">
-    <button id="yesBtn">បាទ/ចាស 😍</button>
-    <button id="noBtn">អត់ទេ </button>
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😢</button>
   </div>
 </div>
 
-<!-- Khmer Sweet Music -->
+<!-- Romantic music -->
 <audio id="music" loop>
-  <!-- You can replace this with your own Khmer song later -->
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-love-ambient-11037.mp3" type="audio/mpeg">
 </audio>
 
@@ -100,16 +98,16 @@ const music = document.getElementById("music");
 
 let noClicks = 0;
 
-// Khmer funny messages
+// Better English messages
 const messages = [
-  "ប្រាកដអត់? 😢",
-  "សាកគិតម្តងទៀត 😭",
-  "ដាច់ចឹត្តមេសបង! 😣",
-  "គិតលេីកចុងក្រេាយមេីល 😫",
-  "កុំធ្វើចឹងមេីល 💔",
-  "ហិហិ 😭",
-  "គេយំហើយ ហីហី😭😭",
-  "😔"
+  "Are you really sure? 😢",
+  "Think again... please? 😭",
+  "Come on, don't be like that 😣",
+  "I’ll be really sad... 😞",
+  "You’re breaking my heart 💔",
+  "Last chance! 😫",
+  "I might cry... 😭😭",
+  "Okay... I still love you anyway 😔"
 ];
 
 // Move NO button
@@ -121,7 +119,7 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.left = Math.random() * maxX + "px";
   noBtn.style.top = Math.random() * maxY + "px";
 });
-<source src="song.mp3" type="audio/mpeg">
+
 // Click NO
 noBtn.addEventListener("click", () => {
   noClicks++;
@@ -134,13 +132,11 @@ noBtn.addEventListener("click", () => {
 
 // Click YES
 yesBtn.addEventListener("click", () => {
-  question.innerText = "យាយ! ខ្ញុំក៏ស្រលាញ់អ្នកដែរ ❤️🥰";
+  question.innerText = "Aww 🥰 I love you too so much ❤️";
 
-  // play music
   music.volume = 0.5;
   music.play();
 
-  // hearts animation
   for (let i = 0; i < 60; i++) {
     let heart = document.createElement("div");
     heart.classList.add("heart");
