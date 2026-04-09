@@ -11,9 +11,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   font-family: Arial, sans-serif;
   overflow: hidden;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ffc3a0);
+  background-size: 400% 400%;
+  animation: gradientBG 8s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -23,7 +31,8 @@ body {
 h1 {
   margin-bottom: 30px;
   color: #333;
-  font-size: 35px;
+  font-size: 38px;
+  transition: 0.3s;
 }
 
 .buttons {
@@ -32,11 +41,11 @@ h1 {
 }
 
 button {
-  width: 130px;
+  width: 140px;
   padding: 10px 0;
   font-size: 22px;
   border: none;
-  border-radius: 15px;
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -50,26 +59,19 @@ button {
   background: #dc3545;
   color: white;
   position: absolute;
-  left: 150px;
+  left: 160px;
   top: 0;
 }
 
 /* floating hearts */
 .heart {
   position: fixed;
-  color: red;
   animation: floatUp 4s linear forwards;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-600px);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-600px); opacity: 0; }
 }
 </style>
 </head>
@@ -77,78 +79,85 @@ button {
 <body>
 
 <div class="container">
-  <h1 id="question">Do you love me? ❤️</h1>
+  <h1 id="question">Do you love me, Samnang? ❤️</h1>
   <div class="buttons">
     <button id="yesBtn">Yes 😍</button>
     <button id="noBtn">No 😢</button>
   </div>
 </div>
 
+<!-- background music -->
+<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
 <script>
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const question = document.getElementById("question");
+const music = document.getElementById("music");
 
 let noClicks = 0;
 
-// Funny text messages
+// Funny messages
 const messages = [
   "Are you sure? 😢",
   "Really sure? 😭",
   "Think again! 😣",
   "Last chance! 😫",
   "Please don't say no 💔",
-  "You are breaking my heart 😭"
+  "You are breaking my heart 😭",
+  "I will cry... 😭😭😭",
+  "Okay fine... I still love you 😔"
 ];
 
-// Move NO button when hover
-noBtn.addEventListener("mouseenter", (e) => {
+// Move NO button (faster + crazy)
+noBtn.addEventListener("mouseover", () => {
   const maxX = window.innerWidth - noBtn.offsetWidth;
   const maxY = window.innerHeight - noBtn.offsetHeight;
 
-  const newX = Math.random() * maxX;
-  const newY = Math.random() * maxY;
-
   noBtn.style.position = "fixed";
-  noBtn.style.left = newX + "px";
-  noBtn.style.top = newY + "px";
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
 });
 
-// When clicking NO
+// Click NO
 noBtn.addEventListener("click", () => {
   noClicks++;
 
-  // Change question text
   question.innerText = messages[Math.min(noClicks, messages.length - 1)];
 
-  // Make YES button bigger
-  let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-  yesBtn.style.fontSize = (currentSize + 6) + "px";
-  yesBtn.style.transform = "scale(1.1)";
+  // grow YES button
+  let size = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+  yesBtn.style.fontSize = (size + 8) + "px";
+  yesBtn.style.transform = "scale(1.2)";
 });
 
-// When clicking YES
+// Click YES
 yesBtn.addEventListener("click", () => {
   question.innerText = "Yay!! I love you too ❤️🥰";
 
-  // Create floating hearts
-  for (let i = 0; i < 40; i++) {
+  // play music
+  music.play();
+
+  // create hearts + sparkles
+  for (let i = 0; i < 60; i++) {
     let heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "❤️";
+
+    // random emoji
+    const emojis = ["❤️","💖","💕","💘","✨"];
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
     heart.style.left = Math.random() * window.innerWidth + "px";
     heart.style.top = window.innerHeight + "px";
-    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    heart.style.fontSize = (Math.random() * 25 + 20) + "px";
 
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 4000);
+    setTimeout(() => heart.remove(), 4000);
   }
 });
 </script>
 
 </body>
 </html>
+
