@@ -133,8 +133,8 @@
 <body>
 
 <div class="glass-card" id="mainCard">
-  <img id="catGif" class="reaction-gif" src="https://www.istockphoto.com/photos/happy-bear" alt="Cute Animal">
-  <h1 id="question">Do you love me? ❤️</h1>
+  <img id="catGif" class="reaction-gif" src="https://www.istockphoto.com/photos/happy-bear" alt="Cute Bear">
+  <h1 id="question">Do you love me Ryda? ❤️</h1>
   
   <div class="buttons">
     <div class="btn-wrapper">
@@ -199,8 +199,7 @@ noBtn.addEventListener("click", () => {
   noClicks++;
   question.innerText = messages[Math.min(noClicks - 1, messages.length - 1)];
   
-  // NEW: Reliable Giphy link for the sad animal
-  catGif.src = "https://media1.tenor.com/m/gUiu1zyxfzYAAAAC/bear-kiss-bear-kisses.gif";
+  catGif.src = "https://media1.tenor.com/m/vGvF1lq7o6QAAAAC/peach-goma.gif";
 
   let currentScale = parseFloat(yesBtn.style.transform.replace(/[^\d.]/g, '') || 1);
   yesBtn.style.transform = `scale(${currentScale + 0.15})`;
@@ -216,8 +215,7 @@ yesBtn.addEventListener("click", () => {
 
   question.innerText = "Aww 🥰 I love you too so much! ❤️";
   
-  // NEW: Reliable Giphy link for the happy kissing animal
-  catGif.src = "https://media.giphy.com/media/Jk4ZT6R0OEUoM/giphy.gif";
+  catGif.src = "https://media1.tenor.com/m/gUiu1zyxfzYAAAAC/bear-kiss-bear-kisses.gif";
 
   music.volume = 0.5;
   music.play().catch(e => console.log("Audio autoplay prevented by browser"));
