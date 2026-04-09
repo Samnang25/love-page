@@ -2,90 +2,150 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Do You Love Me?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ffc3a0);
-  background-size: 400% 400%;
-  animation: gradientBG 8s ease infinite;
-}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #2b1055, #7597de, #eb8686, #fccb90);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+  }
 
-.container {
-  text-align: center;
-}
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-h1 {
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 38px;
-}
+  .glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    padding: 40px 50px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 90%;
+    width: 500px;
+    z-index: 10;
+  }
 
-.buttons {
-  position: relative;
-  display: inline-block;
-}
+  .reaction-gif {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    pointer-events: none;
+    background: rgba(255,255,255,0.5); 
+  }
 
-button {
-  width: 150px;
-  padding: 10px 0;
-  font-size: 22px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+  h1 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    min-height: 80px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-#yesBtn {
-  background: #28a745;
-  color: white;
-}
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
-#noBtn {
-  background: #dc3545;
-  color: white;
-  position: absolute;
-  left: 170px;
-  top: 0;
-}
+  .btn-wrapper {
+    width: 140px;
+    height: 55px;
+  }
 
-/* floating hearts */
-.heart {
-  position: fixed;
-  animation: floatUp 4s linear forwards;
-}
+  button {
+    width: 140px;
+    height: 55px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
 
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-600px); opacity: 0; }
-}
+  button:active {
+    transform: scale(0.95) !important;
+  }
+
+  #yesBtn {
+    background: linear-gradient(45deg, #ff477e, #ff758c);
+    color: white;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 71, 126, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 71, 126, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 71, 126, 0); }
+  }
+
+  #noBtn {
+    background: white;
+    color: #ff477e;
+    border: 2px solid #ff477e;
+    transition: left 0.3s ease, top 0.3s ease; 
+    z-index: 999;
+  }
+
+  .heart {
+    position: fixed;
+    pointer-events: none;
+    animation: floatUp 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    z-index: 5;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; transform: translateY(-100px) scale(1.2); }
+    100% { transform: translateY(-800px) scale(1); opacity: 0; }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="glass-card" id="mainCard">
+  <img id="catGif" class="reaction-gif" src="https://www.istockphoto.com/photos/happy-bear" alt="Cute Animal">
   <h1 id="question">Do you love me? ❤️</h1>
+  
   <div class="buttons">
-    <button id="yesBtn">Yes 😍</button>
-    <button id="noBtn">No 😢</button>
+    <div class="btn-wrapper">
+      <button id="yesBtn">Yes 😍</button>
+    </div>
+    <div class="btn-wrapper">
+      <button id="noBtn">No 😢</button>
+    </div>
   </div>
 </div>
 
-<!-- Romantic music -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-love-ambient-11037.mp3" type="audio/mpeg">
 </audio>
@@ -95,10 +155,10 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const question = document.getElementById("question");
 const music = document.getElementById("music");
+const catGif = document.getElementById("catGif");
 
 let noClicks = 0;
 
-// Better English messages
 const messages = [
   "Are you really sure? 😢",
   "Think again... please? 😭",
@@ -110,49 +170,80 @@ const messages = [
   "Okay... I still love you anyway 😔"
 ];
 
-// Move NO button
-noBtn.addEventListener("mouseover", () => {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
+// Logic to move the NO button
+function moveNoButton() {
+  if (noBtn.parentNode !== document.body) {
+    document.body.appendChild(noBtn);
+  }
 
   noBtn.style.position = "fixed";
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
+  
+  const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+  const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+  noBtn.style.left = Math.max(20, Math.random() * maxX) + "px";
+  noBtn.style.top = Math.max(20, Math.random() * maxY) + "px";
+}
+
+// Mouse hover for desktop
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// Touch start for mobile devices
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault(); 
+  moveNoButton();
 });
 
 // Click NO
 noBtn.addEventListener("click", () => {
   noClicks++;
-  question.innerText = messages[Math.min(noClicks, messages.length - 1)];
+  question.innerText = messages[Math.min(noClicks - 1, messages.length - 1)];
+  
+  // NEW: Reliable Giphy link for the sad animal
+  catGif.src = "https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif";
 
-  let size = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-  yesBtn.style.fontSize = (size + 8) + "px";
-  yesBtn.style.transform = "scale(1.2)";
+  let currentScale = parseFloat(yesBtn.style.transform.replace(/[^\d.]/g, '') || 1);
+  yesBtn.style.transform = `scale(${currentScale + 0.15})`;
 });
 
 // Click YES
 yesBtn.addEventListener("click", () => {
-  question.innerText = "Aww 🥰 I love you too so much ❤️";
+  noBtn.style.display = "none";
+  
+  yesBtn.style.transform = "scale(1)";
+  yesBtn.style.pointerEvents = "none";
+  yesBtn.innerText = "I knew it! 💕";
+
+  question.innerText = "Aww 🥰 I love you too so much! ❤️";
+  
+  // NEW: Reliable Giphy link for the happy kissing animal
+  catGif.src = "https://media.giphy.com/media/Jk4ZT6R0OEUoM/giphy.gif";
 
   music.volume = 0.5;
-  music.play();
+  music.play().catch(e => console.log("Audio autoplay prevented by browser"));
 
-  for (let i = 0; i < 60; i++) {
-    let heart = document.createElement("div");
-    heart.classList.add("heart");
-
-    const emojis = ["❤️","💖","💕","💘","✨"];
-    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = window.innerHeight + "px";
-    heart.style.fontSize = (Math.random() * 25 + 20) + "px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 4000);
+  for (let i = 0; i < 80; i++) {
+    createHeart();
   }
+  
+  setInterval(createHeart, 300);
 });
+
+function createHeart() {
+  let heart = document.createElement("div");
+  heart.classList.add("heart");
+
+  const emojis = ["❤️", "💖", "💕", "💘", "✨", "🌸"];
+  heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.top = "100vh"; 
+  heart.style.fontSize = (Math.random() * 25 + 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 4000);
+}
 </script>
 
 </body>
